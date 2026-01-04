@@ -45,14 +45,14 @@ Figure 1: RAG Workflow - Separating User Interaction and System Logic.
 - Task Management: Jira (Scrum)
 
 📋 Installation and Setup
-1. Clone the Repository
+**1. Clone the Repository**
 
 Bash
 
 git clone <your-repository-link>
 cd rag-demo
 
-2. Configure Virtual Environment
+**2. Configure Virtual Environment**
 Create the virtual environment:
 
 Bash
@@ -71,21 +71,21 @@ Activation on Windows (CMD or PowerShell):
 
       - Troubleshooting (PowerShell): If you receive a script execution error, run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-3. Install Dependencies
+**3. Install Dependencies**
 Ensure your virtual environment is active, then run:
 
 Bash
 
 pip install -r requirements.txt
 
-4. API Key Configuration
+**4. API Key Configuration**
 Create a .env file in the root directory and add your OpenAI API key:
 
 Plaintext: 
 
 OPENAI_API_KEY=your_api_key_here
 
-5. 📖 Data Preparation (adat.txt)
+**5. 📖 Data Preparation (adat.txt)**
 To get the best results, structure your adat.txt file as follows:
 
 - Be Explicit: Use clear headings or bullet points.
@@ -94,7 +94,7 @@ To get the best results, structure your adat.txt file as follows:
 
 - Separation: Use double newlines between different topics.
 
-6. ⚡ Running the Application
+**6. ⚡ Running the Application**
 
 Bash
 
