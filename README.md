@@ -98,8 +98,13 @@ A lightweight Retrieval-Augmented Generation (RAG) application designed to demon
 
       The application can be run in two modes:
 
-      **Web Interface (Recommended):**
+      - **Web Interface (Recommended):**
          ```bash
          streamlit run app.py
 
       This launches a modern, browser-based chat interface.
+
+      - **Terminal Mode (Legacy): If you wish to run the original script:**
+
+        ```bash      
+        python app.py
