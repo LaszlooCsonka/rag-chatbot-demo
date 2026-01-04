@@ -1,5 +1,5 @@
-Minimal RAG Chatbot (LangChain + OpenAI)
-A lightweight Retrieval-Augmented Generation (RAG) application designed to demonstrate document-based AI interaction. This project extracts information from a custom knowledge base (data.txt) and generates precise answers using OpenAI's GPT models.
+**Minimal RAG Chatbot (LangChain + OpenAI)
+A lightweight Retrieval-Augmented Generation (RAG) application designed to demonstrate document-based AI interaction. This project extracts information from a custom knowledge base (data.txt) and generates precise answers using OpenAI's GPT models.**
 
 🏗️ Project Management & Methodology
 This project was developed using professional software engineering standards, focusing on transparency and process modeling.
