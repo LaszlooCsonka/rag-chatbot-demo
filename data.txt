@@ -1,0 +1,1 @@
+László Kovács – AI Developer Currently building RAG systems using Python and LangChain. Passionate about working with OpenAI models and FAISS vector databases.
