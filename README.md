@@ -65,11 +65,11 @@ Activation on Windows (CMD or PowerShell):
 
 [!TIP] Visual Studio Code Setup If the (venv) prefix does not appear in your terminal:
 
-      * Select Interpreter: Press Ctrl + Shift + P, type Python: Select Interpreter, and select the one labeled ('venv': venv).
+      - Select Interpreter: Press Ctrl + Shift + P, type Python: Select Interpreter, and select the one labeled ('venv': venv).
 
-      * Open a New Terminal: Click the + (New Terminal) icon. VS Code will now automatically run the activation script.
+      - Open a New Terminal: Click the + (New Terminal) icon. VS Code will now automatically run the activation script.
 
-      * Troubleshooting (PowerShell): If you receive a script execution error, run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+      - Troubleshooting (PowerShell): If you receive a script execution error, run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 3. Install Dependencies
 Ensure your virtual environment is active, then run:
