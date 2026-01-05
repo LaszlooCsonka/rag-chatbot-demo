@@ -63,7 +63,7 @@ Plaintext
 
 OPENAI_API_KEY=your_actual_key_here
 
-⚡ #### Running the Application
+#### ⚡ Running the Application
 This project provides two primary ways to interact with the AI:
 
 #### A. Web Interface (Streamlit)
@@ -82,7 +82,7 @@ uvicorn api:app --reload
 
 - Once running, access the interactive API documentation at: http://127.0.0.1:8000/docs
 
-📖 #### Data Preparation (data.txt)
+#### 📖 Data Preparation (data.txt)
 The system reads from data.txt. For best results:
 
 Use clear headings and bullet points.
