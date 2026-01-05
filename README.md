@@ -20,6 +20,8 @@ The development followed the **Scrum framework**, managed in **Jira**. All tasks
 The system's internal logic was modeled in **Camunda** to visualize the interaction between the user, the vector store, and the LLM.
 * **Figure 1:** RAG Workflow - Clear separation between User Interaction and Backend Retrieval Logic.
 
+![Rag Process Flow](assets/rag-process-flow.png.png)
+
 ---
 
 ## 🚀 Key Features
