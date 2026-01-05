@@ -8,11 +8,13 @@ A professional-grade Retrieval-Augmented Generation (RAG) application that demon
 This project was developed using professional software engineering standards, focusing on transparency and process modeling.
 
 ### 📋 Agile Development (Scrum)
-The development followed the **Scrum methodology**, managed in **Jira**.
+The development followed the **Scrum framework**, managed in **Jira**. All tasks were organized under a main **MVP Development Epic** to ensure structured delivery.
+
+![Jira Project Structure](assets/jira_project_structure.png)
+
 * **Planning:** 1-week sprint with a defined Backlog and Story Point estimation.
-* **Tracking:** Tasks were organized into Epics and User Stories to ensure clear feature delivery.
-* **Result:** Successfully delivered the RAG engine, Web UI, and API endpoints.
-> *Note: Check the `assets/` folder for the Jira Board screenshots.*
+* **Tracking:** Tasks were organized into an Epic, User Stories, and Tasks to ensure clear feature delivery.
+* **Execution:** Successfully delivered the RAG engine, Streamlit Web UI, and FastAPI endpoints within a single sprint (Sprint 1).
 
 ### ⚙️ Business Process Modeling (BPMN 2.0)
 The system's internal logic was modeled in **Camunda** to visualize the interaction between the user, the vector store, and the LLM.
