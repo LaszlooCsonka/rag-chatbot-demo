@@ -10,7 +10,7 @@ This project was developed using professional software engineering standards, fo
 ### 📋 Agile Development (Scrum)
 The development followed the **Scrum framework**, managed in **Jira**. All tasks were organized under a main **MVP Development Epic** to ensure structured delivery.
 
-![Jira Project Structure](assets/jira_project_structure.png)
+![Jira Project Structure](assets/jira_project_structure.PNG)
 
 * **Planning:** 1-week sprint with a defined Backlog and Story Point estimation.
 * **Tracking:** Tasks were organized into an Epic, User Stories, and Tasks to ensure clear feature delivery.
