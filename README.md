@@ -1,9 +1,17 @@
 # Enterprise RAG Knowledge System (LangChain + OpenAI)
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://rag-chatbot-demo-rrzujpquzun8jdwd7zkzzq.streamlit.app/)
+[![FastAPI](https://img.shields.io/badge/API-FastAPI-009485?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+
 A professional-grade Retrieval-Augmented Generation (RAG) application that demonstrates how to transform static documents into interactive knowledge bases. This project features both a **User Interface (Streamlit)** and a **REST API (FastAPI)**, mimicking real-world AI deployments.
 
 ---
+## 🌐 Live Access
+**The application is deployed and ready to test!**
+* **Interactive Web UI:** [Access the Chatbot here](IDE_ILLESZD_BE_A_STREAMLIT_LINKEKET)
+* **Note:** The demo uses a pre-configured knowledge base focused on the system's own architecture.
 
+---
 ## 🏗️ Project Management & Methodology
 This project was developed using professional software engineering standards, focusing on transparency and process modeling.
 
@@ -50,8 +58,11 @@ Bash
 
 git clone <your-repository-link>
 cd rag-demo
-py -m venv venv
+python -m venv venv
+# Windows:
 .\venv\Scripts\activate
+# Linux/MacOS:
+source venv/bin/activate
 
 ### 2. Install Dependencies
 
