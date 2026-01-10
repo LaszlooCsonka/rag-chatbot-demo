@@ -4,10 +4,8 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
-
-# CORRECT MODERN IMPORTS (LangChain 1.x compatible):
-from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain.chains import create_retrieval_chain
 from langchain_core.prompts import ChatPromptTemplate
 
 # 1. Loading settings
@@ -21,19 +19,19 @@ st.markdown("Interactive Q&A system powered by LangChain and Vector Search.")
 # 2. Initializing RAG engine
 @st.cache_resource
 def setup_qa_chain():
-    # Ensure data.txt exists in your repository root
+    # Load document
     loader = TextLoader("data.txt", encoding="utf-8")
     documents = loader.load()
     
+    # Create vector store
     vectorstore = FAISS.from_documents(documents, OpenAIEmbeddings())
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
     
-    # Define the system prompt
+    # Define system prompt
     system_prompt = (
-        "Use the following pieces of retrieved context to answer the question. "
-        "If you don't know the answer, just say that you don't know, don't try to make up an answer."
-        "\n\n"
-        "{context}"
+        "Use the given context to answer the question. "
+        "If you don't know the answer, say you don't know. "
+        "Context: {context}"
     )
     
     prompt = ChatPromptTemplate.from_messages([
@@ -41,7 +39,7 @@ def setup_qa_chain():
         ("human", "{input}"),
     ])
 
-    # Create the chains using LCEL
+    # Create chains
     question_answer_chain = create_stuff_documents_chain(llm, prompt)
     return create_retrieval_chain(vectorstore.as_retriever(), question_answer_chain)
 
@@ -51,22 +49,19 @@ qa_chain = setup_qa_chain()
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Displaying previous messages
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
 # 4. Handling user input
 if prompt := st.chat_input("Ask something about data.txt..."):
-    # User message
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # AI response
     with st.chat_message("assistant"):
         with st.spinner("Searching knowledge base..."):
-            # Using the correct key 'input' and receiving 'answer'
+            # New chain uses 'input' as key and returns 'answer'
             response = qa_chain.invoke({"input": prompt})
             answer = response["answer"]
             st.markdown(answer)
