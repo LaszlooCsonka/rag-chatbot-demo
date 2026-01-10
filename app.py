@@ -5,8 +5,8 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
 
-# AZ ÚJ, PONTOS IMPORT HELYEK:
-from langchain.chains import retrieval
+# CORRECT MODERN IMPORTS (LangChain 1.x compatible):
+from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -18,26 +18,32 @@ st.set_page_config(page_title="AI Knowledge Assistant", page_icon="🧠")
 st.title("🧠 Enterprise RAG Explorer")
 st.markdown("Interactive Q&A system powered by LangChain and Vector Search.")
 
-# 2. Initializing RAG engine (Runs only once!)
+# 2. Initializing RAG engine
 @st.cache_resource
 def setup_qa_chain():
+    # Ensure data.txt exists in your repository root
     loader = TextLoader("data.txt", encoding="utf-8")
     documents = loader.load()
+    
     vectorstore = FAISS.from_documents(documents, OpenAIEmbeddings())
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
     
-    # Define the prompt
-    prompt = ChatPromptTemplate.from_template("""
-    Answer the following question based only on the provided context:
-    <context>
-    {context}
-    </context>
-    Question: {input}
-    """)
+    # Define the system prompt
+    system_prompt = (
+        "Use the following pieces of retrieved context to answer the question. "
+        "If you don't know the answer, just say that you don't know, don't try to make up an answer."
+        "\n\n"
+        "{context}"
+    )
+    
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", system_prompt),
+        ("human", "{input}"),
+    ])
 
-    # Create the chains
-    combine_docs_chain = create_stuff_documents_chain(llm, prompt)
-    return create_retrieval_chain(vectorstore.as_retriever(), combine_docs_chain)
+    # Create the chains using LCEL
+    question_answer_chain = create_stuff_documents_chain(llm, prompt)
+    return create_retrieval_chain(vectorstore.as_retriever(), question_answer_chain)
 
 qa_chain = setup_qa_chain()
 
@@ -60,6 +66,7 @@ if prompt := st.chat_input("Ask something about data.txt..."):
     # AI response
     with st.chat_message("assistant"):
         with st.spinner("Searching knowledge base..."):
+            # Using the correct key 'input' and receiving 'answer'
             response = qa_chain.invoke({"input": prompt})
             answer = response["answer"]
             st.markdown(answer)
