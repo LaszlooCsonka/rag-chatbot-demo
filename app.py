@@ -4,8 +4,9 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
-#from langchain.chains import RetrievalQA
-from langchain_community.chains import RetrievalQA
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_core.prompts import ChatPromptTemplate
 
 # 1. Loading settings
 load_dotenv()
@@ -18,20 +19,23 @@ st.markdown("Interactive Q&A system powered by LangChain and Vector Search.")
 # 2. Initializing RAG engine (Runs only once!)
 @st.cache_resource
 def setup_qa_chain():
-    # Your code's logic:
     loader = TextLoader("data.txt", encoding="utf-8")
     documents = loader.load()
-    
-    # Creating vector store
     vectorstore = FAISS.from_documents(documents, OpenAIEmbeddings())
-    
-    # Assembling the chain
     llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-    return RetrievalQA.from_chain_type(
-        llm=llm, 
-        chain_type="stuff", 
-        retriever=vectorstore.as_retriever()
-    )
+    
+    # Define the prompt
+    prompt = ChatPromptTemplate.from_template("""
+    Answer the following question based only on the provided context:
+    <context>
+    {context}
+    </context>
+    Question: {input}
+    """)
+
+    # Create the chains
+    combine_docs_chain = create_stuff_documents_chain(llm, prompt)
+    return create_retrieval_chain(vectorstore.as_retriever(), combine_docs_chain)
 
 qa_chain = setup_qa_chain()
 
@@ -54,7 +58,7 @@ if prompt := st.chat_input("Ask something about data.txt..."):
     # AI response
     with st.chat_message("assistant"):
         with st.spinner("Searching knowledge base..."):
-            response = qa_chain.invoke(prompt)
-            answer = response["result"]
+            response = qa_chain.invoke({"input": prompt})
+            answer = response["answer"]
             st.markdown(answer)
             st.session_state.messages.append({"role": "assistant", "content": answer})
