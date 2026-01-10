@@ -8,7 +8,7 @@ A professional-grade Retrieval-Augmented Generation (RAG) application that demon
 ---
 ## 🌐 Live Access
 **The application is deployed and ready to test!**
-* **Interactive Web UI:** [Access the Chatbot here](IDE_ILLESZD_BE_A_STREAMLIT_LINKEKET)
+* **Interactive Web UI:** [Access the Chatbot here](https://rag-chatbot-demo-rrzujpquzun8jdwd7zkzzq.streamlit.app/)
 * **Note:** The demo uses a pre-configured knowledge base focused on the system's own architecture.
 
 ---
